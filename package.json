@@ -1,0 +1,52 @@
+{
+  "name": "landing-cloud-surquillo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@rematch/core": "^1.0.6",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.3",
+    "node-sass": "^4.11.0",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.16.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.4.0-beta.6",
+    "react-scripts": "2.1.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "build-js": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "start-dev": "REACT_APP_URL_ENV=develop npm-run-all -p watch-css start-js ",
+    "start-staging": "REACT_APP_URL_ENV=staging npm-run-all -p watch-css start-js ",
+    "start-pre": "REACT_APP_URL_ENV=pre npm-run-all -p watch-css start-js ",
+    "start-pro": "REACT_APP_URL_ENV=production npm-run-all -p watch-css start-js ",
+    "build-dev": "REACT_APP_URL_ENV=develop  npm-run-all build-css build-js",
+    "build-pre": "REACT_APP_URL_ENV=pre  npm-run-all build-css build-js",
+    "build-pro": "GENERATE_SOURCEMAP=false REACT_APP_URL_ENV=production npm-run-all build-css build-js",
+    "build-staging": "REACT_APP_URL_ENV=develop npm-run-all build-css build-js",
+    "build": "npm-run-all build-staging",
+    "start": "npm-run-all start-dev"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
